@@ -160,7 +160,7 @@
 
 </div>
 
-<button onclick="submitChoice()">Submit</button>
+<button onclick="submitChoice(); callAPI();">Submit</button>
 
 <script>
   let selectedBlock = null;
@@ -194,22 +194,24 @@
   }
 
 
-  var callAPI = (firstName,lastName)=>{
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({"user_id": "_test_user_id_from_amplify_webpage_","user_selection":selectedBlock});
-    // create a JSON object with parameters for API call and store in a variable
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-    // make API call with parameters and use promises to get response
-    fetch("YOUR-API-INVOKE-URL", requestOptions)
-    .then(response => response.text())
-    .then(result => alert(JSON.parse(result).body))
-    .catch(error => console.log('error', error));
+  var callAPI = () => {
+    if (selectedBlock){
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var raw = JSON.stringify({"user_id": "_test_user_id_from_amplify_webpage_","user_selection":selectedBlock});
+      // create a JSON object with parameters for API call and store in a variable
+      var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+      };
+      // make API call with parameters and use promises to get response
+      fetch("YOUR-API-INVOKE-URL", requestOptions)
+      .then(response => response.text())
+      .then(result => alert(JSON.parse(result).body))
+      .catch(error => console.log('error', error));
+    }
   }
 
 </script>
