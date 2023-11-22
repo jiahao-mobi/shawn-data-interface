@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A/B 测试界面</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+  }
+  .block, .prompt-block {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+  }
+  .block {
+    width: 45%;
+  }
+  .prompt-block {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .block h2, .prompt-block h2 {
+    color: #333;
+  }
+  .block p, .prompt-block p {
+    color: #666;
+  }
+  button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #9b59b6;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+</style>
+</head>
+<body>
+
+<div class="prompt-block">
+  <h2>Please select the option</h2>
+  <p>The user preference is ["Sushi", "Coffee"]</p>
+</div>
+
+<div class="container">
+    <div id="blockA" class="block">
+        <h2>Recommendation A</h2>
+        <table>
+            <tr>
+            <th>Name</th>
+            <th>Tags</th>
+            </tr>
+            <!-- Table rows for Recommendation A -->
+            <tr>
+                <td>Walnut Local Bistro</td>
+                <td>Brew_pub, American, Bar</td>
+            </tr>
+            <tr>
+                <td>Pagu</td>
+                <td>Spanish, Japanese, Asian</td>
+            </tr>
+            <tr>
+                <td>Fin's Japanese Sushi and Grill</td>
+                <td>Japanese, Sushi, Asian</td>
+            </tr>
+            <tr>
+                <td>224 Boston Street</td>
+                <td>American, Greek, Burger</td>
+            </tr>
+            <tr>
+                <td>Mystic Station Eatery & Bar</td>
+                <td>American, Gastropub, Burger</td>
+            </tr>
+        </table>
+        <!-- <ol>
+          <li>Walnut Local Bistro ['Brew_pub', 'American', 'Bar']</li>
+          <li>Pagu ['Spanish', 'Japanese', 'Asian']</li>
+          <li>Fin's Japanese Sushi and Grill ['Japanese', 'Sushi', 'Asian']</li>
+          
+          <li>224 Boston Street ['American', 'Greek', 'Burger']</li>
+          <li>Mystic Station Eatery & Bar ['American', 'Gastropub', 'Burger']</li>
+        </ol> -->
+    </div>
+
+  <div id="blockB" class="block">
+    <h2>Recommendation B</h2>
+    <table>
+        <tr>
+        <th>Name</th>
+        <th>Tags</th>
+        </tr>
+        <!-- Table rows for Recommendation B -->
+        <tr>
+            <td>River Town Eatery</td>
+            <td>Italian, Wine Bar, European</td>
+        </tr>
+        <tr>
+            <td>Bamboo Garden</td>
+            <td>Chinese, Dim Sum, Asian</td>
+        </tr>
+        <tr>
+            <td>The Greenhouse Kitchen</td>
+            <td>Vegetarian, Healthy, Salad</td>
+        </tr>
+        <tr>
+            <td>Ocean's Delight</td>
+            <td>Seafood, Mediterranean, Tapas</td>
+        </tr>
+        <tr>
+            <td>Grill & Vine</td>
+            <td>American, Grill, Steakhouse</td>
+        </tr>
+    </table>
+        <!-- <ol>
+            <li>River Town Eatery ['Italian', 'Wine Bar', 'European']</li>
+            <li>Bamboo Garden ['Chinese', 'Dim Sum', 'Asian']</li>
+            <li>The Greenhouse Kitchen ['Vegetarian', 'Healthy', 'Salad']</li>
+            <li>Ocean's Delight ['Seafood', 'Mediterranean', 'Tapas']</li>
+            <li>Grill & Vine ['American', 'Grill', 'Steakhouse']</li>
+        </ol> -->
+    </div>
+
+</div>
+
+<button onclick="submitChoice()">Submit</button>
+
+<script>
+  let selectedBlock = null;
+
+  // Add click event listeners to blocks
+  document.getElementById('blockA').addEventListener('click', function() {
+    selectedBlock = 'A';
+    highlightSelection(this);
+  });
+
+  document.getElementById('blockB').addEventListener('click', function() {
+    selectedBlock = 'B';
+    highlightSelection(this);
+  });
+
+  function highlightSelection(block) {
+    // Remove highlights
+    document.getElementById('blockA').style.backgroundColor = '';
+    document.getElementById('blockB').style.backgroundColor = '';
+
+    // Highlight selected block
+    block.style.backgroundColor = '#ecf0f1';
+  }
+
+  function submitChoice() {
+    if (selectedBlock) {
+      alert('You Selected ' + selectedBlock);
+    } else {
+      alert('Please select one option before submit');
+    }
+  }
+</script>
+
+</body>
+</html>
